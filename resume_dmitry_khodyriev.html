@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивне резюме - Dmytro Khodyriev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page, vertical scrolling resume designed for clarity and user engagement. The structure flows from a high-level summary (Hero) to detailed, interactive sections for skills, services, and experience, concluding with professional profiles and contact info. This top-down approach allows a recruiter to get key info first and then dive deeper. A Gemini-powered cover letter helper is added to provide direct value. Interactive elements like skill charts and profile links are chosen to present dense information in a digestible, engaging way. -->
+    <!-- Visualization & Content Choices: 
+    - Report Info: Core skills (Video, Graphics, etc.). Goal: Organize. Viz/Method: Static cards. Interaction: Static display. Justification: Clear, concise presentation without unnecessary clicks.
+    - Report Info: Professional Profiles (Behance, etc.). Goal: Provide external links. Viz/Method: Clickable cards with logos. Interaction: Click to open new tab. Justification: Logos provide quick recognition, and cards are better touch targets than simple text links. Library/Method: HTML/Tailwind with img tags.
+    - Report Info: Work History. Goal: Show Change/Progression. Viz/Method: Vertical timeline. Interaction: Static display. Justification: Visually engaging format to show career progression.
+    - Report Info: Language/Tool proficiency. Goal: Inform/Compare. Viz/Method: Two separate charts (Radar for software, Bar for languages). Interaction: Hover tooltips. Justification: Separates distinct skill types for clarity. Radar chart effectively shows a profile of software skills, while bar chart is standard and clear for language proficiency. Library/Method: Chart.js (Canvas).
+    - Gemini Feature: AI Cover Letter Helper. Goal: Engage/Assist Recruiter. Method: Text area input, button trigger, API call to Gemini. Interaction: User inputs job description, clicks generate, receives tailored text. Justification: Provides immediate, tangible value, showcasing technical integration and proactiveness.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #1a202c;
+        }
+        .font-logo {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #DD6B20;
+        }
+        .skill-card, .profile-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .skill-card:hover, .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #DD6B20;
+            left: -0.5rem;
+            top: 0.25rem;
+            border: 3px solid #FDFBF8;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #DD6B20;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-3xl font-bold text-gray-800 font-logo">Dmytro K.</div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="nav-link text-gray-600" data-lang-ua="Про мене" data-lang-en="About">Про мене</a>
+                    <a href="#skills" class="nav-link text-gray-600" data-lang-ua="Навички" data-lang-en="Skills">Навички</a>
+                    <a href="#profiles" class="nav-link text-gray-600" data-lang-ua="Портфоліо" data-lang-en="Portfolio">Портфоліо</a>
+                    <a href="#experience" class="nav-link text-gray-600" data-lang-ua="Досвід" data-lang-en="Experience">Досвід</a>
+                    <a href="#gemini-helper" class="nav-link text-gray-600" data-lang-ua="✨ AI Помічник" data-lang-en="✨ AI Assistant">✨ AI Помічник</a>
+                    <a href="#contact" class="nav-link text-gray-600" data-lang-ua="Контакти" data-lang-en="Contact">Контакти</a>
+                </div>
+                <div class="flex items-center border border-gray-300 rounded-full p-1">
+                    <button id="lang-ua" class="px-3 py-1 text-sm rounded-full bg-orange-500 text-white">UA</button>
+                    <button id="lang-en" class="px-3 py-1 text-sm rounded-full">EN</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="about" class="flex flex-col md:flex-row items-center justify-center text-center md:text-left min-h-[80vh]">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4" data-lang-ua="Дмитро Ходирєв" data-lang-en="Dmytro Khodyriev">Дмитро Ходирєв</h1>
+                <h2 class="text-2xl text-orange-600 font-semibold mb-6" data-lang-ua="Графічний дизайнер та Відеомонтажер" data-lang-en="Graphic Designer & Video Editor">Графічний дизайнер та Відеомонтажер</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto md:mx-0 mb-8" data-lang-ua="22-річний креативний спеціаліст, що поєднує навички графічного дизайну та відеомонтажу для створення візуально привабливого контенту. Спеціалізуюся на обробці фото, розробці банерів, а також на створенні динамічних відеороликів для соціальних мереж та рекламних кампаній." data-lang-en="A 22-year-old creative specialist combining graphic design and video editing skills to produce visually compelling content. I specialize in photo processing, banner design, and creating dynamic videos for social media and advertising campaigns.">22-річний креативний спеціаліст, що поєднує навички графічного дизайну та відеомонтажу для створення візуально привабливого контенту. Спеціалізуюся на обробці фото, розробці банерів, а також на створенні динамічних відеороликів для соціальних мереж та рекламних кампаній.</p>
+                <a href="#contact" class="bg-orange-600 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-700 transition duration-300" data-lang-ua="Зв'язатися" data-lang-en="Contact Me">Зв'язатися</a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-d5333ac7-2274/5434116619061292911.jpg" alt="Дмитро Ходирєв" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-white">
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24">
+            <h2 class="text-3xl font-bold text-center mb-4" data-lang-ua="Ключові компетенції" data-lang-en="Key Competencies">Ключові компетенції</h2>
+             <div class="text-center mb-12">
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-ua="Мій підхід базується на трьох основних стовпах: технічна майстерність у відео, креативність у дизайні та сильні комунікативні навички для досягнення результатів." data-lang-en="My approach is based on three main pillars: technical mastery in video, creativity in design, and strong communication skills to achieve results.">Мій підхід базується на трьох основних стовпах: технічна майстерність у відео, креативність у дизайні та сильні комунікативні навички для досягнення результатів.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4" data-lang-ua="Відеомонтаж" data-lang-en="Video Editing">Відеомонтаж</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li data-lang-ua="▪️ Динамічний монтаж у стилі 'хайлайтів'" data-lang-en="▪️ Dynamic 'highlights' style editing">▪️ Динамічний монтаж у стилі 'хайлайтів'</li>
+                        <li data-lang-ua="▪️ Сторітелінг та побудова розповіді" data-lang-en="▪️ Storytelling and narrative construction">▪️ Сторітелінг та побудова розповіді</li>
+                        <li data-lang-ua="▪️ Робота з ефектами, SFX та переходами" data-lang-en="▪️ Working with effects, SFX, and transitions">▪️ Робота з ефектами, SFX та переходами</li>
+                        <li data-lang-ua="▪️ Монтаж вертикальних відео (Shorts, Reels)" data-lang-en="▪️ Vertical video editing (Shorts, Reels)">▪️ Монтаж вертикальних відео (Shorts, Reels)</li>
+                    </ul>
+                </div>
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4" data-lang-ua="Графічний дизайн" data-lang-en="Graphic Design">Графічний дизайн</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li data-lang-ua="▪️ Створення прев'ю (thumbnails) для YouTube" data-lang-en="▪️ Creating thumbnails for YouTube">▪️ Створення прев'ю (thumbnails) для YouTube</li>
+                        <li data-lang-ua="▪️ Обробка фото, ретуш, корекція кольору" data-lang-en="▪️ Photo processing, retouching, color correction">▪️ Обробка фото, ретуш, корекція кольору</li>
+                        <li data-lang-ua="▪️ Створення банерів та фотомонтажів" data-lang-en="▪️ Creating banners and photo manipulations">▪️ Створення банерів та фотомонтажів</li>
+                    </ul>
+                </div>
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4" data-lang-ua="Soft Skills" data-lang-en="Soft Skills">Soft Skills</h3>
+                     <ul class="text-gray-600 space-y-2">
+                        <li data-lang-ua="▪️ Увага до деталей та організованість" data-lang-en="▪️ Attention to detail and organization">▪️ Увага до деталей та організованість</li>
+                        <li data-lang-ua="▪️ Адаптивність та швидке навчання" data-lang-en="▪️ Adaptability and quick learning">▪️ Адаптивність та швидке навчання</li>
+                        <li data-lang-ua="▪️ Проактивність та комунікабельність" data-lang-en="▪️ Proactivity and communication">▪️ Проактивність та комунікабельність</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="profiles" class="py-16 md:py-24 bg-orange-50/50 rounded-lg text-center">
+            <h2 class="text-3xl font-bold mb-4" data-lang-ua="Портфоліо та Профілі" data-lang-en="Portfolio & Profiles">Портфоліо та Профілі</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto" data-lang-ua="Перегляньте мої роботи та відгуки на провідних платформах для фрілансерів та креативних спеціалістів." data-lang-en="Check out my work and reviews on leading platforms for freelancers and creative professionals.">Перегляньте мої роботи та відгуки на провідних платформах для фрілансерів та креативних спеціалістів.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <a href="https://freelancehunt.com/freelancer/DarkSad.html" target="_blank" class="profile-card bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-d5333ac7-2274/uploaded:Freelancehunt.png-912e235d-0dc8-4726-8f56-5f9f7ead4b55" alt="Freelancehunt Logo" class="h-16 object-contain mb-4">
+                    <span class="text-lg font-semibold">Freelancehunt</span>
+                </a>
+                <a href="https://www.fiverr.com/s/Q7VQAB1" target="_blank" class="profile-card bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-d5333ac7-2274/uploaded:Fiverr.png-870fff27-9730-400a-b5f4-01b393471306" alt="Fiverr Logo" class="h-16 object-contain mb-4">
+                    <span class="text-lg font-semibold">Fiverr</span>
+                </a>
+                <a href="https://www.behance.net/1drks1d" target="_blank" class="profile-card bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-d5333ac7-2274/uploaded:Behance.png-de467bcf-f3da-4082-bc69-614d05cf2bcb" alt="Behance Logo" class="h-16 object-contain mb-4">
+                    <span class="text-lg font-semibold">Behance</span>
+                </a>
+                <a href="https://www.upwork.com/freelancers/~01c5cd980f2e6862fd" target="_blank" class="profile-card bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-d5333ac7-2274/uploaded:Upwork.png-45d46855-f28d-411e-9fc0-02307a259c15" alt="Upwork Logo" class="h-16 object-contain mb-4">
+                    <span class="text-lg font-semibold">Upwork</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 md:py-24">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-ua="Досвід роботи та освіта" data-lang-en="Experience & Education">Досвід роботи та освіта</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8" data-lang-ua="Досвід" data-lang-en="Experience">Досвід</h3>
+                    <div class="relative border-l-2 border-orange-200 pl-8 space-y-12">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold text-lg" data-lang-ua="Креативний монтажер (Ad Creatives)" data-lang-en="Creative Editor (Ad Creatives)">Креативний монтажер (Ad Creatives)</h4>
+                            <p class="text-orange-600" data-lang-ua="Арбітражна команда" data-lang-en="Arbitrage Team">Арбітражна команда</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="Лютий 2025 — по теп. час" data-lang-en="February 2025 — Present">Лютий 2025 — по теп. час</p>
+                            <p class="mt-2 text-gray-600" data-lang-ua="Монтаж відеокреативів для рекламних кампаній." data-lang-en="Editing video creatives for ad campaigns.">Монтаж відеокреативів для рекламних кампаній.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold text-lg" data-lang-ua="Відеомонтажник" data-lang-en="Video Editor">Відеомонтажник</h4>
+                            <p class="text-orange-600">NeoWi</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="Січень 2023 — по теп. час" data-lang-en="January 2023 — Present">Січень 2023 — по теп. час</p>
+                            <p class="mt-2 text-gray-600" data-lang-ua="Монтаж рекламних відео та контенту для соцмереж." data-lang-en="Editing promotional videos and social media content.">Монтаж рекламних відео та контенту для соцмереж.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold text-lg" data-lang-ua="Асистент керівника" data-lang-en="Head's Assistant">Асистент керівника</h4>
+                            <p class="text-orange-600">SOFT SHOULDER</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="Лютий 2023 — по теп. час" data-lang-en="February 2023 — Present">Лютий 2023 — по теп. час</p>
+                            <p class="mt-2 text-gray-600" data-lang-ua="Комунікація з клієнтами, робота з документацією, допомога у стратегічному плануванні." data-lang-en="Client communication, documentation, and strategic planning assistance.">Комунікація з клієнтами, робота з документацією, допомога у стратегічному плануванні.</p>
+                        </div>
+                         <div class="timeline-item">
+                            <h4 class="font-semibold text-lg" data-lang-ua="Асистент керівника" data-lang-en="Head's Assistant">Асистент керівника</h4>
+                            <p class="text-orange-600">ФОП Моісєєв Ю.В.</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="Жовтень 2022 — по теп. час" data-lang-en="October 2022 — Present">Жовтень 2022 — по теп. час</p>
+                            <p class="mt-2 text-gray-600" data-lang-ua="Управління проєктами та координація завдань." data-lang-en="Project management and task coordination.">Управління проєктами та координація завдань.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                     <h3 class="text-2xl font-semibold mb-8" data-lang-ua="Освіта" data-lang-en="Education">Освіта</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="font-semibold text-lg" data-lang-ua="Запорізький національний університет" data-lang-en="Zaporizhzhia National University">Запорізький національний університет</h4>
+                            <p class="text-orange-600" data-lang-ua="Графічний дизайнер (Бакалавр)" data-lang-en="Graphic Designer (Bachelor)">Графічний дизайнер (Бакалавр)</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="2022 — 2026 (очікувано)" data-lang-en="2022 — 2026 (expected)">2022 — 2026 (очікувано)</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg" data-lang-ua="Михайлівське вище професійне училище" data-lang-en="Mykhailivske Higher Vocational School">Михайлівське вище професійне училище</h4>
+                            <p class="text-orange-600" data-lang-ua="Оператор з обробки інформації та ПЗ" data-lang-en="Operator of Information & Software Processing">Оператор з обробки інформації та ПЗ</p>
+                            <p class="mt-1 text-gray-600 text-sm" data-lang-ua="Отримана повна загальна середня освіта." data-lang-en="Received a certificate of complete general secondary education.">Отримана повна загальна середня освіта.</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="2019 — 2022" data-lang-en="2019 — 2022">2019 — 2022</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg" data-lang-ua="Михайлівський НВК" data-lang-en="Mykhailivskyi Educational Complex">Михайлівський НВК</h4>
+                            <p class="text-orange-600" data-lang-ua="Базова середня освіта" data-lang-en="Basic Secondary Education">Базова середня освіта</p>
+                            <p class="text-sm text-gray-500" data-lang-ua="Закінчив у 2019" data-lang-en="Graduated in 2019">Закінчив у 2019</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tech-skills" class="py-16 md:py-24">
+             <h3 class="text-3xl font-bold text-center mb-12" data-lang-ua="Технічні навички та мови" data-lang-en="Technical Skills & Languages">Технічні навички та мови</h3>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                 <div>
+                    <h4 class="text-2xl font-semibold mb-6 text-center" data-lang-ua="Програмне забезпечення" data-lang-en="Software">Програмне забезпечення</h4>
+                    <div class="chart-container relative h-80 w-full max-w-lg mx-auto">
+                        <canvas id="softwareSkillsChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-semibold mb-6 text-center" data-lang-ua="Мови" data-lang-en="Languages">Мови</h4>
+                    <div class="chart-container relative h-48 w-full max-w-lg mx-auto">
+                        <canvas id="languageSkillsChart"></canvas>
+                    </div>
+                     <p class="text-center text-gray-500 text-sm mt-6" data-lang-ua="Рівень володіння постійно вдосконалюється завдяки практиці та вивченню нового." data-lang-en="Proficiency levels are constantly improving through practice and continuous learning.">Рівень володіння постійно вдосконалюється завдяки практиці та вивченню нового.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gemini-helper" class="py-16 md:py-24 text-center">
+             <h2 class="text-3xl font-bold mb-4" data-lang-ua="✨ AI Помічник для Супровідного Листа" data-lang-en="✨ AI Cover Letter Assistant">✨ AI Помічник для Супровідного Листа</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto" data-lang-ua="Вставте опис вакансії нижче, і AI-помічник на базі Gemini згенерує короткий абзац, який показує, чому я є чудовим кандидатом для цієї ролі." data-lang-en="Paste a job description below, and the Gemini-powered AI assistant will generate a short paragraph highlighting why I am a great fit for the role.">Вставте опис вакансії нижче, і AI-помічник на базі Gemini згенерує короткий абзац, який показує, чому я є чудовим кандидатом для цієї ролі.</p>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                <textarea id="job-description" class="w-full h-40 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent transition" data-lang-ua-placeholder="Наприклад: 'Шукаємо талановитого відеомонтажера для ігрового YouTube-каналу...'" data-lang-en-placeholder="E.g., 'Looking for a talented video editor for a gaming YouTube channel...'"></textarea>
+                <button id="generate-btn" class="mt-4 bg-orange-600 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-700 transition duration-300 w-full" data-lang-ua="Сгенерувати ✨" data-lang-en="Generate ✨">Сгенерувати ✨</button>
+                <div id="gemini-result-container" class="mt-6 text-left hidden">
+                    <h3 class="text-xl font-semibold mb-2" data-lang-ua="Результат:" data-lang-en="Result:">Результат:</h3>
+                    <div id="gemini-result" class="p-4 bg-gray-50 rounded-md border border-gray-200 text-gray-700 whitespace-pre-wrap"></div>
+                </div>
+                 <div id="gemini-loader" class="mt-6 hidden justify-center items-center">
+                    <div class="loader"></div>
+                </div>
+                 <div id="gemini-error" class="mt-6 text-red-600 hidden" data-lang-ua="Щось пішло не так. Будь ласка, спробуйте ще раз." data-lang-en="Something went wrong. Please try again.">Щось пішло не так. Будь ласка, спробуйте ще раз.</div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-24 text-center bg-white rounded-lg">
+            <h2 class="text-3xl font-bold mb-4" data-lang-ua="Готові до співпраці?" data-lang-en="Ready to Collaborate?">Готові до співпраці?</h2>
+            <p class="text-gray-600 mb-8 max-w-xl mx-auto" data-lang-ua="Зв'яжіться зі мною, щоб обговорити, як мої навички можуть бути корисними для ваших проєктів." data-lang-en="Contact me to discuss how my skills can be beneficial for your projects.">Зв'яжіться зі мною, щоб обговорити, як мої навички можуть бути корисними для ваших проєктів.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
+                <a href="mailto:mrdxworld@gmail.com" class="text-gray-700 hover:text-orange-600 transition">📧 mrdxworld@gmail.com</a>
+                <span class="text-gray-300 hidden md:block">|</span>
+                <a href="tel:+380687935765" class="text-gray-700 hover:text-orange-600 transition">📞 +38 (068) 793-57-65</a>
+                <span class="text-gray-300 hidden md:block">|</span>
+                <a href="https://t.me/inF1Xy" target="_blank" class="text-gray-700 hover:text-orange-600 transition">✈️ Telegram: @inF1Xy</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 bg-gray-100">
+        <p class="text-gray-500 text-sm" data-lang-ua="© 2025 Dmytro Khodyriev. Всі права захищено." data-lang-en="© 2025 Dmytro Khodyriev. All rights reserved.">© 2025 Dmytro Khodyriev. Всі права захищено.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            let softwareChart, languageChart;
+            const langUaBtn = document.getElementById('lang-ua');
+            const langEnBtn = document.getElementById('lang-en');
+            let currentLang = 'ua';
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+
+                document.querySelectorAll('[data-lang-ua]').forEach(el => {
+                    const content = el.getAttribute(`data-lang-${lang}`);
+                    if (content.includes('<') && content.includes('>')) {
+                        el.innerHTML = content;
+                    } else {
+                        el.textContent = content;
+                    }
+                });
+
+                document.querySelectorAll('[data-lang-ua-placeholder]').forEach(el => {
+                    el.placeholder = el.getAttribute(`data-lang-${lang}-placeholder`);
+                });
+
+                if (lang === 'ua') {
+                    langUaBtn.classList.add('bg-orange-500', 'text-white');
+                    langEnBtn.classList.remove('bg-orange-500', 'text-white');
+                } else {
+                    langEnBtn.classList.add('bg-orange-500', 'text-white');
+                    langUaBtn.classList.remove('bg-orange-500', 'text-white');
+                }
+                updateCharts();
+            }
+
+            langUaBtn.addEventListener('click', () => setLanguage('ua'));
+            langEnBtn.addEventListener('click', () => setLanguage('en'));
+
+            const chartData = {
+                software: {
+                    ua: {
+                        labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Сервіси'],
+                        datasets: [{
+                            label: 'Рівень володіння',
+                            data: [55, 75, 40, 30, 15, 80],
+                            backgroundColor: 'rgba(221, 107, 32, 0.2)',
+                            borderColor: 'rgba(221, 107, 32, 1)',
+                            pointBackgroundColor: 'rgba(221, 107, 32, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(221, 107, 32, 1)'
+                        }]
+                    },
+                    en: {
+                        labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Services'],
+                        datasets: [{
+                            label: 'Proficiency Level',
+                            data: [55, 75, 40, 30, 15, 80],
+                            backgroundColor: 'rgba(221, 107, 32, 0.2)',
+                            borderColor: 'rgba(221, 107, 32, 1)',
+                            pointBackgroundColor: 'rgba(221, 107, 32, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(221, 107, 32, 1)'
+                        }]
+                    }
+                },
+                languages: {
+                    ua: {
+                        labels: ['Українська', 'Російська', 'Англійська'],
+                        datasets: [{
+                            label: 'Рівень володіння',
+                            data: [95, 95, 55],
+                            backgroundColor: ['#e86a1e', '#f58b47', '#fcd2b3'],
+                            borderColor: '#FDFBF8',
+                            borderWidth: 2
+                        }]
+                    },
+                    en: {
+                        labels: ['Ukrainian', 'Russian', 'English'],
+                        datasets: [{
+                            label: 'Proficiency Level',
+                            data: [95, 95, 55],
+                           backgroundColor: ['#e86a1e', '#f58b47', '#fcd2b3'],
+                            borderColor: '#FDFBF8',
+                            borderWidth: 2
+                        }]
+                    }
+                }
+            };
+            
+            function updateCharts() {
+                // Software Chart (Radar)
+                const softwareCtx = document.getElementById('softwareSkillsChart').getContext('2d');
+                if (softwareChart) {
+                    softwareChart.destroy();
+                }
+                softwareChart = new Chart(softwareCtx, {
+                    type: 'radar',
+                    data: chartData.software[currentLang],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                ticks: {
+                                     stepSize: 20,
+                                     backdropColor: 'rgba(253, 251, 248, 0.75)',
+                                     callback: value => value + '%'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Language Chart (Bar)
+                const languageCtx = document.getElementById('languageSkillsChart').getContext('2d');
+                if (languageChart) {
+                    languageChart.destroy();
+                }
+                languageChart = new Chart(languageCtx, {
+                    type: 'bar',
+                    data: chartData.languages[currentLang],
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label || ''}: ${context.parsed.x}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: { callback: value => value + '%' }
+                            },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            const generateBtn = document.getElementById('generate-btn');
+            const jobDescriptionInput = document.getElementById('job-description');
+            const resultContainer = document.getElementById('gemini-result-container');
+            const resultDiv = document.getElementById('gemini-result');
+            const loader = document.getElementById('gemini-loader');
+            const errorDiv = document.getElementById('gemini-error');
+
+            const getResumeContext = (lang) => {
+                if (lang === 'en') {
+                    return `
+                        - Candidate: Dmytro Khodyriev, 22 years old.
+                        - Role: Graphic Designer & Video Editor.
+                        - Key Software: Adobe Photoshop (proficient), Adobe Premiere Pro (intermediate), After Effects/Illustrator/Blender (basic), various AI services (proficient).
+                        - Experience: Creative editing for ad campaigns, social media content creation (video & graphics), client communication, and project management.
+                        - Strengths: Versatile, combines technical and creative skills, adaptable, quick learner.`;
+                }
+                return `
+                        - Кандидат: Дмитро Ходирєв, 22 роки.
+                        - Роль: Графічний дизайнер та Відеомонтажер.
+                        - Ключові програми: Adobe Photoshop (впевнений рівень), Adobe Premiere Pro (середній рівень), After Effects/Illustrator/Blender (базовий рівень), різноманітні AI-сервіси (впевнене використання).
+                        - Досвід: Креативний монтаж для рекламних кампаній, створення контенту для соцмереж (відео та графіка), комунікація з клієнтами, управління проєктами.
+                        - Сильні сторони: Універсальність, поєднання технічних та творчих навичок, адаптивність, швидко навчаюсь.`;
+            };
+
+            const getPromptTemplates = (lang) => {
+                if (lang === 'en') {
+                    return {
+                        system: "You are a professional career assistant. Your task is to write a concise, professional, and compelling paragraph (3-4 sentences) for a cover letter. Use the provided resume summary of Dmytro Khodyriev to explain why he is an excellent candidate for the given job description. Directly connect his skills and experience to the requirements in the job description. The response must be in English.",
+                        user: (context, jobDesc) => `Based on the following resume summary of Dmytro Khodyriev, please write the cover letter paragraph.\n\n--- RESUME SUMMARY ---\n${context}\n\n--- JOB DESCRIPTION ---\n${jobDesc}`
+                    };
+                }
+                return {
+                    system: "Ти — професійний кар'єрний асистент. Твоє завдання — написати короткий, професійний та переконливий абзац (3-4 речення) для супровідного листа. Використовуй надану інформацію з резюме Дмитра Ходирєва, щоб пояснити, чому він є чудовим кандидатом на вказану вакансію. Прямо пов'язуй його навички та досвід з вимогами у вакансії. Відповідь має бути українською мовою.",
+                    user: (context, jobDesc) => `На основі наступної інформації з резюме Дмитра Ходирєва, будь ласка, напиши абзац для супровідного листа.\n\n--- ІНФОРМАЦІЯ З РЕЗЮМЕ ---\n${context}\n\n--- ОПИС ВАКАНСІЇ ---\n${jobDesc}`
+                };
+            }
+
+            generateBtn.addEventListener('click', async () => {
+                const jobDesc = jobDescriptionInput.value;
+                if (!jobDesc.trim()) {
+                    jobDescriptionInput.focus();
+                    return;
+                }
+
+                loader.style.display = 'flex';
+                resultContainer.classList.add('hidden');
+                errorDiv.classList.add('hidden');
+                generateBtn.disabled = true;
+
+                try {
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                    const resumeContext = getResumeContext(currentLang);
+                    const templates = getPromptTemplates(currentLang);
+                    const userQuery = templates.user(resumeContext, jobDesc);
+                    
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: {
+                            parts: [{ text: templates.system }]
+                        },
+                    };
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API call failed with status: ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        resultDiv.textContent = candidate.content.parts[0].text;
+                        resultContainer.classList.remove('hidden');
+                    } else {
+                        throw new Error('Invalid response structure from API.');
+                    }
+
+                } catch (error) {
+                    console.error("Gemini API Error:", error);
+                    errorDiv.classList.remove('hidden');
+                } finally {
+                    loader.style.display = 'none';
+                    generateBtn.disabled = false;
+                }
+            });
+
+            setLanguage('ua');
+        });
+    </script>
+</body>
+</html>
