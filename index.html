@@ -48,6 +48,16 @@
             top: 0.25rem;
             transition: border-color 0.3s;
         }
+        .lang-btn.active {
+            background-color: #f97316; /* orange-500 */
+            color: white;
+        }
+        .lang-btn.inactive {
+            color: #475569; /* slate-600 */
+        }
+        .dark .lang-btn.inactive {
+            color: #cbd5e1; /* dark:text-slate-300 */
+        }
     </style>
 </head>
 <body class="bg-[#FDFBF8] text-slate-800 dark:bg-slate-900 dark:text-slate-300">
@@ -68,8 +78,8 @@
                         <svg id="theme-toggle-light-icon" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05A1 1 0 003.636 6.464l.707.707a1 1 0 001.414-1.414l-.707-.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                     </button>
                     <div class="flex items-center border border-slate-300 dark:border-slate-700 rounded-full p-1">
-                        <button id="lang-ua" class="px-3 py-1 text-sm rounded-full bg-orange-500 text-white">UA</button>
-                        <button id="lang-en" class="px-3 py-1 text-sm rounded-full text-slate-600 dark:text-slate-300">EN</button>
+                        <button id="lang-ua" class="lang-btn px-3 py-1 text-sm rounded-full">UA</button>
+                        <button id="lang-en" class="lang-btn px-3 py-1 text-sm rounded-full">EN</button>
                     </div>
                 </div>
             </div>
@@ -280,15 +290,15 @@
                 });
                 
                 if (lang === 'ua') {
-                    langUaBtn.classList.add('bg-orange-500', 'text-white');
-                    langUaBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
-                    langEnBtn.classList.remove('bg-orange-500', 'text-white');
-                    langEnBtn.classList.add('text-slate-600', 'dark:text-slate-300');
+                    langUaBtn.classList.add('active');
+                    langUaBtn.classList.remove('inactive');
+                    langEnBtn.classList.remove('active');
+                    langEnBtn.classList.add('inactive');
                 } else {
-                    langEnBtn.classList.add('bg-orange-500', 'text-white');
-                    langEnBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
-                    langUaBtn.classList.remove('bg-orange-500', 'text-white');
-                    langUaBtn.classList.add('text-slate-600', 'dark:text-slate-300');
+                    langEnBtn.classList.add('active');
+                    langEnBtn.classList.remove('inactive');
+                    langUaBtn.classList.remove('active');
+                    langUaBtn.classList.add('inactive');
                 }
                 updateCharts();
             }
