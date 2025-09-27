@@ -250,43 +250,49 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
             let softwareChart, languageChart;
             const langUaBtn = document.getElementById('lang-ua');
             const langEnBtn = document.getElementById('lang-en');
-            let currentLang = 'ua';
-            
             const themeToggleBtn = document.getElementById('theme-toggle');
             const darkIcon = document.getElementById('theme-toggle-dark-icon');
             const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+            let currentLang = 'ua';
             let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-            function applyTheme(theme) {
+            const chartData = {
+                software: {
+                    ua: { labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Сервіси'], datasets: [{ label: 'Рівень володіння', data: [55, 75, 40, 30, 15, 80] }] },
+                    en: { labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Services'], datasets: [{ label: 'Proficiency Level', data: [55, 75, 40, 30, 15, 80] }] }
+                },
+                languages: {
+                    ua: { labels: ['Українська', 'Російська', 'Англійська'], datasets: [{ label: 'Рівень володіння', data: [95, 95, 55] }] },
+                    en: { labels: ['Ukrainian', 'Russian', 'English'], datasets: [{ label: 'Proficiency Level', data: [95, 95, 55] }] }
+                }
+            };
+
+            const applyTheme = (theme) => {
+                currentTheme = theme;
+                localStorage.setItem('theme', theme);
+
                 if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
                     darkIcon.classList.remove('hidden');
                     lightIcon.classList.add('hidden');
                 } else {
                     document.documentElement.classList.remove('dark');
-                    darkIcon.classList.add('hidden');
                     lightIcon.classList.remove('hidden');
+                    darkIcon.classList.add('hidden');
                 }
-                currentTheme = theme;
-                localStorage.setItem('theme', theme);
                 updateCharts();
-            }
+            };
 
-            themeToggleBtn.addEventListener('click', () => {
-                applyTheme(currentTheme === 'light' ? 'dark' : 'light');
-            });
-
-            function setLanguage(lang) {
+            const applyLanguage = (lang) => {
                 currentLang = lang;
                 document.documentElement.lang = lang;
 
                 document.querySelectorAll('[data-lang-ua]').forEach(el => {
-                    const content = el.getAttribute(`data-lang-${lang}`);
-                    el.innerHTML = content;
+                    el.innerHTML = el.getAttribute(`data-lang-${lang}`);
                 });
                 
                 if (lang === 'ua') {
@@ -301,40 +307,13 @@
                     langUaBtn.classList.add('inactive');
                 }
                 updateCharts();
-            }
-
-            langUaBtn.addEventListener('click', () => setLanguage('ua'));
-            langEnBtn.addEventListener('click', () => setLanguage('en'));
-
-            const chartData = {
-                software: {
-                    ua: {
-                        labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Сервіси'],
-                        datasets: [{ label: 'Рівень володіння', data: [55, 75, 40, 30, 15, 80] }]
-                    },
-                    en: {
-                        labels: ['Premiere Pro', 'Photoshop', 'After Effects', 'Illustrator', 'Blender', 'AI Services'],
-                        datasets: [{ label: 'Proficiency Level', data: [55, 75, 40, 30, 15, 80] }]
-                    }
-                },
-                languages: {
-                    ua: {
-                        labels: ['Українська', 'Російська', 'Англійська'],
-                        datasets: [{ label: 'Рівень володіння', data: [95, 95, 55] }]
-                    },
-                    en: {
-                        labels: ['Ukrainian', 'Russian', 'English'],
-                        datasets: [{ label: 'Proficiency Level', data: [95, 95, 55] }]
-                    }
-                }
             };
             
-            function getChartOptions(isRadar) {
+            const getChartOptions = (isRadar) => {
                 const isDark = currentTheme === 'dark';
                 const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
                 const textColor = isDark ? '#cbd5e1' : '#475569';
-                const pointBgColor = isDark ? '#FDFBF8' : 'rgba(221, 107, 32, 1)';
-
+                
                 if (isRadar) {
                     return {
                         responsive: true, maintainAspectRatio: false,
@@ -343,10 +322,10 @@
                             r: {
                                 beginAtZero: true, max: 100,
                                 grid: { color: gridColor },
-                                pointLabels: { color: textColor, font: {size: 14}},
+                                pointLabels: { color: textColor, font: { size: 14 } },
                                 ticks: {
                                      stepSize: 20,
-                                     backdropColor: isDark ? 'rgba(15, 23, 42, 0.75)' :'rgba(253, 251, 248, 0.75)',
+                                     backdropColor: isDark ? 'rgba(15, 23, 42, 0.75)' : 'rgba(253, 251, 248, 0.75)',
                                      color: textColor,
                                      callback: value => value + '%'
                                 }
@@ -373,16 +352,15 @@
                         }
                     }
                 };
-            }
+            };
 
-            function updateCharts() {
+            const updateCharts = () => {
                 const isDark = currentTheme === 'dark';
 
                 // Software Chart
-                const softwareCtx = document.getElementById('softwareSkillsChart').getContext('2d');
                 if (softwareChart) softwareChart.destroy();
-                
-                const softwareChartConfig = {
+                const softwareCtx = document.getElementById('softwareSkillsChart').getContext('2d');
+                softwareChart = new Chart(softwareCtx, {
                     type: 'radar',
                     data: {
                         labels: chartData.software[currentLang].labels,
@@ -397,16 +375,14 @@
                         }]
                     },
                     options: getChartOptions(true)
-                };
-                softwareChart = new Chart(softwareCtx, softwareChartConfig);
+                });
 
                 // Language Chart
-                const languageCtx = document.getElementById('languageSkillsChart').getContext('2d');
                 if (languageChart) languageChart.destroy();
-                
-                const languageChartConfig = {
+                const languageCtx = document.getElementById('languageSkillsChart').getContext('2d');
+                languageChart = new Chart(languageCtx, {
                     type: 'bar',
-                     data: {
+                    data: {
                         labels: chartData.languages[currentLang].labels,
                         datasets: [{
                            ...chartData.languages[currentLang].datasets[0],
@@ -418,12 +394,16 @@
                         }]
                     },
                     options: getChartOptions(false)
-                };
-                languageChart = new Chart(languageCtx, languageChartConfig);
-            }
-            
+                });
+            };
+
+            themeToggleBtn.addEventListener('click', () => applyTheme(currentTheme === 'light' ? 'dark' : 'light'));
+            langUaBtn.addEventListener('click', () => applyLanguage('ua'));
+            langEnBtn.addEventListener('click', () => applyLanguage('en'));
+
+            // Initial setup
             applyTheme(currentTheme);
-            setLanguage('ua');
+            applyLanguage('ua');
         });
     </script>
 </body>
