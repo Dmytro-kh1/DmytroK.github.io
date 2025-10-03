@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ИЗМЕНЕНО: Название вкладки теперь отражает твою специализацию -->
     <title>Dmytro Khodyriev - Video Content Creator & Motion Designer</title>
-    <!-- ПУТЬ СОХРАНЕН: Favicon -->
     <link rel="icon" type="image/png" href="/DmytroK.github.io/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- УДАЛЕНО: Chart.js больше не нужен -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Более нейтральный фон */
-            color: #1e293b; /* Более темный текст для контраста */
+            background-color: #f8fafc;
+            color: #1e293b;
         }
         .font-logo {
             font-family: 'Playfair Display', serif;
         }
-        /* ИЗМЕНЕНО: Цветовая схема заменена на Teal */
         .nav-link {
             transition: color 0.3s;
         }
         .nav-link:hover {
-            color: #0d9488; /* Teal-600 */
+            color: #0d9488;
         }
         .skill-card, .profile-card, .tool-card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -39,13 +35,13 @@
             width: 1rem;
             height: 1rem;
             border-radius: 50%;
-            background-color: #0d9488; /* Teal-600 */
+            background-color: #0d9488;
             left: -0.5rem;
             top: 0.25rem;
             border: 3px solid #f8fafc;
         }
         .lang-btn.active {
-            background-color: #0d9488; /* Teal-600 */
+            background-color: #0d9488;
             color: white;
         }
         .lang-btn.inactive {
@@ -76,14 +72,11 @@
     <main class="container mx-auto px-6 py-12">
         <section id="about" class="flex flex-col md:flex-row items-center justify-center text-center md:text-left min-h-[80vh]">
             <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 md:order-2">
-                <!-- ПУТЬ СОХРАНЕН: Profile Image -->
                 <img src="/DmytroK.github.io/images/profile.jpg" alt="Дмитро Ходирєв" class="w-72 h-72 md:w-96 md:h-96 rounded-full object-cover shadow-2xl border-4 border-white">
             </div>
             <div class="w-full md:w-1/2 md:pr-12 md:order-1">
                 <h1 class="text-4xl md:text-5xl font-bold font-sans text-slate-800 mb-4" data-lang-ua="Дмитро Ходирєв" data-lang-en="Dmytro Khodyriev">Дмитро Ходирєв</h1>
-                <!-- ИЗМЕНЕНО: Позиционирование -->
                 <h2 class="text-2xl text-teal-600 font-semibold mb-6" data-lang-ua="Video Content Creator & Motion Designer" data-lang-en="Video Content Creator & Motion Designer">Video Content Creator & Motion Designer</h2>
-                <!-- ИЗМЕНЕНО: Описание стало более профессиональным -->
                 <p class="text-lg text-slate-600 max-w-xl mx-auto md:mx-0 mb-8" data-lang-ua="Створюю візуальний контент, який привертає увагу та вирішує бізнес-завдання. Спеціалізуюся на динамічному відеомонтажі для соціальних мереж та рекламних кампаній, посилюючи його яскравим графічним дизайном." data-lang-en="I create visual content that grabs attention and solves business objectives. I specialize in dynamic video editing for social media and ad campaigns, reinforced with compelling graphic design.">Створюю візуальний контент, який привертає увагу та вирішує бізнес-завдання. Спеціалізуюся на динамічному відеомонтажі для соціальних мереж та рекламних кампаній, посилюючи його яскравим графічним дизайном.</p>
                 <a href="#contact" class="bg-teal-600 text-white font-bold py-3 px-8 rounded-full hover:bg-teal-700 transition duration-300" data-lang-ua="Зв'язатися" data-lang-en="Contact Me">Зв'язатися</a>
             </div>
@@ -95,29 +88,59 @@
                 <p class="text-slate-600 max-w-2xl mx-auto" data-lang-ua="Мій підхід базується на трьох основних стовпах: технічна майстерність у відео, креативність у дизайні та сильні комунікативні навички для досягнення результатів." data-lang-en="My approach is based on three main pillars: technical mastery in video, creativity in design, and strong communication skills to achieve results.">Мій підхід базується на трьох основних стовпах: технічна майстерність у відео, креативність у дизайні та сильні комунікативні навички для досягнення результатів.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-slate-800" data-lang-ua="Відеомонтаж" data-lang-en="Video Editing">Відеомонтаж</h3>
-                    <ul class="text-slate-600 space-y-2">
-                        <li data-lang-ua="▪️ Динамічний монтаж у стилі 'хайлайтів'" data-lang-en="▪️ Dynamic 'highlights' style editing">▪️ Динамічний монтаж у стилі 'хайлайтів'</li>
-                        <li data-lang-ua="▪️ Сторітелінг та побудова розповіді" data-lang-en="▪️ Storytelling and narrative construction">▪️ Сторітелінг та побудова розповіді</li>
-                        <li data-lang-ua="▪️ Робота з ефектами, SFX та переходами" data-lang-en="▪️ Working with effects, SFX, and transitions">▪️ Робота з ефектами, SFX та переходами</li>
-                        <li data-lang-ua="▪️ Монтаж вертикальних відео (Shorts, Reels)" data-lang-en="▪️ Vertical video editing (Shorts, Reels)">▪️ Монтаж вертикальних відео (Shorts, Reels)</li>
+                <div class="skill-card bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800" data-lang-ua="Відеомонтаж" data-lang-en="Video Editing">Відеомонтаж</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Динамічний монтаж у стилі 'хайлайтів'" data-lang-en="Dynamic 'highlights' style editing">Динамічний монтаж у стилі 'хайлайтів'</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Сторітелінг та побудова розповіді" data-lang-en="Storytelling and narrative construction">Сторітелінг та побудова розповіді</span>
+                        </li>
+                        <li class="flex items-start">
+                             <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Робота з ефектами, SFX та переходами" data-lang-en="Working with effects, SFX, and transitions">Робота з ефектами, SFX та переходами</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Монтаж вертикальних відео" data-lang-en="Vertical video editing">Монтаж вертикальних відео</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-slate-800" data-lang-ua="Графічний дизайн" data-lang-en="Graphic Design">Графічний дизайн</h3>
-                    <ul class="text-slate-600 space-y-2">
-                        <li data-lang-ua="▪️ Створення прев'ю (thumbnails) для YouTube" data-lang-en="▪️ Creating thumbnails for YouTube">▪️ Створення прев'ю (thumbnails) для YouTube</li>
-                        <li data-lang-ua="▪️ Обробка фото, ретуш, корекція кольору" data-lang-en="▪️ Photo processing, retouching, color correction">▪️ Обробка фото, ретуш, корекція кольору</li>
-                        <li data-lang-ua="▪️ Створення банерів та фотомонтажів" data-lang-en="▪️ Creating banners and photo manipulations">▪️ Створення банерів та фотомонтажів</li>
+                <div class="skill-card bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800" data-lang-ua="Графічний дизайн" data-lang-en="Graphic Design">Графічний дизайн</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Створення прев'ю (thumbnails) для YouTube" data-lang-en="Creating thumbnails for YouTube">Створення прев'ю (thumbnails) для YouTube</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Обробка фото, ретуш, корекція кольору" data-lang-en="Photo processing, retouching, color correction">Обробка фото, ретуш, корекція кольору</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1.586-1.586a2 2 0 010-2.828L16 8M9 11l-1-1 4-4 6 6-1 1-3-3-2 2z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Створення банерів та фотомонтажів" data-lang-en="Creating banners and photo manipulations">Створення банерів та фотомонтажів</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-slate-800" data-lang-ua="Soft Skills" data-lang-en="Soft Skills">Soft Skills</h3>
-                     <ul class="text-slate-600 space-y-2">
-                        <li data-lang-ua="▪️ Увага до деталей та організованість" data-lang-en="▪️ Attention to detail and organization">▪️ Увага до деталей та організованість</li>
-                        <li data-lang-ua="▪️ Адаптивність та швидке навчання" data-lang-en="▪️ Adaptability and quick learning">▪️ Адаптивність та швидке навчання</li>
-                        <li data-lang-ua="▪️ Проактивність та комунікабельність" data-lang-en="▪️ Proactivity and communication">▪️ Проактивність та комунікабельність</li>
+                <div class="skill-card bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800" data-lang-ua="Soft Skills" data-lang-en="Soft Skills">Soft Skills</h3>
+                     <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Увага до деталей та організованість" data-lang-en="Attention to detail and organization">Увага до деталей та організованість</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Адаптивність та швидке навчання" data-lang-en="Adaptability and quick learning">Адаптивність та швидке навчання</span>
+                        </li>
+                        <li class="flex items-start">
+                           <svg class="w-6 h-6 text-teal-500 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V4a2 2 0 012-2h8a2 2 0 012 2v4z"></path></svg>
+                            <span class="text-slate-600" data-lang-ua="Проактивність та комунікабельність" data-lang-en="Proactivity and communication">Проактивність та комунікабельність</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -127,7 +150,6 @@
             <h2 class="text-3xl font-bold mb-4 text-slate-800" data-lang-ua="Портфоліо та Профілі" data-lang-en="Portfolio & Profiles">Портфоліо та Профілі</h2>
             <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto" data-lang-ua="Перегляньте мої роботи та відгуки на провідних платформах для фрілансерів та креативних спеціалістів." data-lang-en="Check out my work and reviews on leading platforms for freelancers and creative professionals.">Перегляньте мої роботи та відгуки на провідних платформах для фрілансерів та креативних спеціалістів.</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <!-- ПУТИ СОХРАНЕНЫ: Profile Links -->
                 <a href="https://freelancehunt.com/freelancer/DarkSad.html" target="_blank" class="profile-card bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
                     <img src="/DmytroK.github.io/images/freelancehunt.png" alt="Freelancehunt Logo" class="h-16 object-contain mb-4">
                     <span class="text-lg font-semibold text-slate-800">Freelancehunt</span>
@@ -152,25 +174,23 @@
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
                 <div>
                     <h3 class="text-2xl font-semibold mb-8 text-slate-800" data-lang-ua="Досвід" data-lang-en="Experience">Досвід</h3>
-                    <!-- ИЗМЕНЕНО: Опыт работы полностью переписан -->
                     <div class="relative border-l-2 border-teal-200 pl-8 space-y-12">
                         <div class="timeline-item">
-                            <h4 class="font-semibold text-lg text-slate-800" data-lang-ua="Video Content Creator / Motion Designer" data-lang-en="Video Content Creator / Motion Designer">Video Content Creator / Motion Designer</h4>
+                            <h4 class="font-semibold text-lg text-slate-800" data-lang-ua="Креативний відеоредактор" data-lang-en="Creative Video Editor">Креативний відеоредактор</h4>
                             <p class="text-teal-600" data-lang-ua="Performance Marketing Agency" data-lang-en="Performance Marketing Agency">Performance Marketing Agency</p>
                             <p class="text-sm text-slate-500" data-lang-ua="Лютий 2025 — по теп. час" data-lang-en="February 2025 — Present">Лютий 2025 — по теп. час</p>
-                            <p class="mt-2 text-slate-600" data-lang-ua="Створення короткоформатного відеоконтенту (Reels, Shorts, Ad Creatives) для рекламних кампаній. Робота була сфокусована на підвищенні CTR та утриманні уваги аудиторії у висококонкурентній ніші. Використовував Adobe Premiere Pro та After Effects." data-lang-en="Created short-form video content (Reels, Shorts, Ad Creatives) for advertising campaigns. The work was focused on increasing CTR and audience retention in a highly competitive niche. Used Adobe Premiere Pro & After Effects.">Створення короткоформатного відеоконтенту (Reels, Shorts, Ad Creatives) для рекламних кампаній. Робота була сфокусована на підвищенні CTR та утриманні уваги аудиторії у висококонкурентній ніші. Використовував Adobe Premiere Pro та After Effects.</p>
+                            <p class="mt-2 text-slate-600" data-lang-ua="Відповідав за повний цикл пост-продакшену відео-креативів за готовими сценаріями. Ключові задачі: динамічний монтаж, підбір та інтеграція стокових матеріалів, професійний саунд-дизайн та фінальний брендинг для створення контенту, що конвертує." data-lang-en="Responsible for the full post-production cycle of video creatives based on provided scripts. Key tasks included dynamic editing, sourcing and integrating stock materials, professional sound design, and final branding to create high-converting content.">Відповідав за повний цикл пост-продакшену відео-креативів за готовими сценаріями. Ключові задачі: динамічний монтаж, підбір та інтеграція стокових матеріалів, професійний саунд-дизайн та фінальний брендинг для створення контенту, що конвертує.</p>
                         </div>
                         <div class="timeline-item">
-                            <h4 class="font-semibold text-lg text-slate-800" data-lang-ua="Video Editor" data-lang-en="Video Editor">Video Editor</h4>
+                            <h4 class="font-semibold text-lg text-slate-800" data-lang-ua="Спеціаліст з відеоконтенту" data-lang-en="Video Content Specialist">Спеціаліст з відеоконтенту</h4>
                             <p class="text-teal-600">NeoWi</p>
-                            <p class="text-sm text-slate-500" data-lang-ua="Січень 2023 — по теп. час" data-lang-en="January 2023 — Present">Січень 2023 — по теп. час</p>
-                            <p class="mt-2 text-slate-600" data-lang-ua="Монтаж рекламних роликів та контенту для соціальних мереж (YouTube, Instagram). Адаптація візуальних матеріалів під вимоги різних платформ для підвищення залученості аудиторії." data-lang-en="Edited promotional videos and content for social media (YouTube, Instagram). Adapted visual materials to platform requirements to increase audience engagement.">Монтаж рекламних роликів та контенту для соціальних мереж (YouTube, Instagram). Адаптація візуальних матеріалів під вимоги різних платформ для підвищення залученості аудиторії.</p>
+                            <p class="text-sm text-slate-500" data-lang-ua="Січень 2023 — Листопад 2025" data-lang-en="January 2023 — November 2025">Січень 2023 — Листопад 2025</p>
+                            <p class="mt-2 text-slate-600" data-lang-ua="Керував повним циклом виробництва контенту для YouTube-каналу. Задачі включали: підготовку сценаріїв, продакшен та обробку озвучки, динамічний монтаж, створення прев'ю (Photoshop) та фінальну SEO-оптимізацію при публікації відео." data-lang-en="Managed the full content production cycle for a YouTube channel. Responsibilities included: script preparation, voice-over production and editing, dynamic editing, thumbnail creation (Photoshop), and final SEO optimization upon video publication.">Керував повним циклом виробництва контенту для YouTube-каналу. Задачі включали: підготовку сценаріїв, продакшен та обробку озвучки, динамічний монтаж, створення прев'ю (Photoshop) та фінальну SEO-оптимізацію при публікації відео.</p>
                         </div>
                     </div>
                 </div>
                 <div>
                      <h3 class="text-2xl font-semibold mb-8 text-slate-800" data-lang-ua="Освіта" data-lang-en="Education">Освіта</h3>
-                     <!-- ИЗМЕНЕНО: Образование почищено от мусора -->
                     <div class="space-y-8">
                         <div>
                             <h4 class="font-semibold text-lg text-slate-800" data-lang-ua="Запорізький національний університет" data-lang-en="Zaporizhzhia National University">Запорізький національний університет</h4>
@@ -182,30 +202,65 @@
             </div>
         </section>
         
-        <!-- ИЗМЕНЕНО: Полностью переделана секция навыков. Графики удалены. -->
         <section id="tech-skills" class="py-16 md:py-24 bg-white rounded-lg">
             <h3 class="text-3xl font-bold text-center mb-12 text-slate-800" data-lang-ua="Технічний арсенал" data-lang-en="Technical Arsenal">Технічний арсенал</h3>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
                 <div>
-                    <h4 class="text-2xl font-semibold mb-6 text-center text-slate-800" data-lang-ua="Програмне забезпечення" data-lang-en="Software">Програмне забезпечення</h4>
-                    <ul class="grid grid-cols-2 gap-4 text-center">
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Adobe Premiere Pro</li>
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Adobe Photoshop</li>
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Adobe After Effects</li>
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Adobe Bridge</li>
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Figma</li>
-                        <li class="tool-card bg-slate-50 p-4 rounded-lg">Blender</li>
+                    <h4 class="text-2xl font-semibold mb-8 text-center text-slate-800" data-lang-ua="Програмне забезпечення" data-lang-en="Software">Програмне забезпечення</h4>
+                    <ul class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                        <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
+                            <span class="font-medium">Adobe Premiere Pro</span>
+                        </li>
+                         <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m-2 1l2-1m-2 1l2 1m7-2l-2 1M3 7l2 1M3 7l2-1m2 1l-2-1m2 1l-2 1M12 2a10 10 0 110 20 10 10 0 010-20z"></path></svg>
+                            <span class="font-medium">Adobe Photoshop</span>
+                        </li>
+                         <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                           <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            <span class="font-medium">Adobe After Effects</span>
+                        </li>
+                         <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <span class="font-medium">Adobe Bridge</span>
+                        </li>
+                         <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                            <span class="font-medium">Figma</span>
+                        </li>
+                         <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4M4 7v10l8 4M4 7l8 4"></path></svg>
+                            <span class="font-medium">Blender</span>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-2xl font-semibold mb-6 text-center text-slate-800" data-lang-ua="Ключові навички" data-lang-en="Key Skills">Ключові навички</h4>
-                    <ul class="grid grid-cols-2 gap-4 text-center">
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Відеомонтаж та Сторітелінг" data-lang-en="Video Editing & Storytelling">Відеомонтаж та Сторітелінг</li>
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Моушн-дизайн" data-lang-en="Motion Graphics">Моушн-дизайн</li>
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Корекція кольору та Ретуш" data-lang-en="Color Correction & Retouching">Корекція кольору та Ретуш</li>
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Дизайн прев'ю (CTR)" data-lang-en="Thumbnail Design (CTR)">Дизайн прев'ю (CTR)</li>
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Контент для соцмереж" data-lang-en="Social Media Content">Контент для соцмереж</li>
-                       <li class="tool-card bg-slate-50 p-4 rounded-lg" data-lang-ua="Керування асетами" data-lang-en="Digital Asset Management">Керування асетами</li>
+                    <h4 class="text-2xl font-semibold mb-8 text-center text-slate-800" data-lang-ua="Ключові навички" data-lang-en="Key Skills">Ключові навички</h4>
+                    <ul class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="font-medium" data-lang-ua="Відеомонтаж та Сторітелінг" data-lang-en="Video Editing & Storytelling">Відеомонтаж</span>
+                        </li>
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="font-medium" data-lang-ua="Моушн-дизайн" data-lang-en="Motion Graphics">Моушн-дизайн</span>
+                        </li>
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.636 5.636a9 9 0 0112.728 0M12 12a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+                            <span class="font-medium" data-lang-ua="Саунд-дизайн" data-lang-en="Sound Design">Саунд-дизайн</span>
+                        </li>
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                            <span class="font-medium" data-lang-ua="Корекція кольору та Ретуш" data-lang-en="Color Correction & Retouching">Корекція кольору</span>
+                        </li>
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <span class="font-medium" data-lang-ua="Дизайн прев'ю (CTR)" data-lang-en="Thumbnail Design (CTR)">Дизайн прев'ю</span>
+                        </li>
+                       <li class="tool-card bg-slate-50 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <svg class="w-10 h-10 mb-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3M5.636 5.636l-1.414-1.414M19.778 19.778l-1.414-1.414M19.778 5.636l-1.414 1.414M5.636 19.778l-1.414 1.414M12 12a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                            <span class="font-medium" data-lang-ua="Робота з AI-інструментами" data-lang-en="AI-Assisted Workflows">AI-інструменти</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -228,7 +283,6 @@
         <p class="text-slate-500 text-sm" data-lang-ua="© 2025 Dmytro Khodyriev. Всі права захищено." data-lang-en="© 2025 Dmytro Khodyriev. All rights reserved.">© 2025 Dmytro Khodyriev. Всі права захищено.</p>
     </footer>
 
-    <!-- УДАЛЕНО: Весь JS для Chart.js. Оставлен только переключатель языка. -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const langUaBtn = document.getElementById('lang-ua');
@@ -236,10 +290,8 @@
             
             const applyLanguage = (lang) => {
                 document.documentElement.lang = lang;
-
                 document.querySelectorAll('[data-lang-ua]').forEach(el => {
                     const text = el.getAttribute(`data-lang-${lang}`);
-                    // Проверяем, чтобы не вставлять null или undefined
                     if (text) {
                         el.innerHTML = text;
                     }
@@ -261,7 +313,6 @@
             langUaBtn.addEventListener('click', () => applyLanguage('ua'));
             langEnBtn.addEventListener('click', () => applyLanguage('en'));
 
-            // Initial setup
             applyLanguage('ua');
         });
     </script>
